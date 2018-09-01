@@ -9,20 +9,21 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
 
-import sendMsgToSparky
+#import webex_teams
+from webex_teams.webex_teams import *
 
 class myGUI():
     def __init__(self):
         self.app = QApplication([])
         # crea una finestra
         self.window = QWidget()
-        self.sender = sendMsgToSparky.sendMsgToSparky()
+        self.sender = webexTeams()
         self.initUI()
 
 
     def initUI(self):
         self.window.resize(500, 500)
-        self.window.setWindowTitle('SignoSoftware - Send Msg to Sparky Bot')
+        self.window.setWindowTitle('SignoSoftware - Post on Webex Teams')
         # main vertical layout
         self.layoutVert = QVBoxLayout()
 
@@ -70,14 +71,9 @@ class myGUI():
 
     def buttonSendCallback(self):
         print("Clicked Send Button")
-        #textedit.setText("Ciao")
-        #self.messageText.append("Ciao")
-        self.sender.send(self.messageText.toPlainText())
+        self.sender.send_to_email(self.emailText.text(), self.messageText.toPlainText())
 
 
-
-# ---- BEGIN ------
-# inizializzo la GUI
 if __name__ == '__main__':
     p = myGUI()
     p.run()
